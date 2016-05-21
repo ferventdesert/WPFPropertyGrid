@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{384BD3E5-BCC4-4582-9CDC-C927E5E8297B}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>System.Windows.Controls.WpfPropertyGrid</RootNamespace>
+    <AssemblyName>System.Windows.Controls.WpfPropertyGrid</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Hawk\Includes\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\AttributeHelper.cs" />
+    <Compile Include="Attributes\AttributesContainer.cs" />
+    <Compile Include="Attributes\BrowsableCategoryAttribute.cs" />
+    <Compile Include="Attributes\BrowsablePropertyAttribute.cs" />
+    <Compile Include="Attributes\CancelRoutedEventArgs.cs" />
+    <Compile Include="Attributes\CategoryEditorAttribute.cs" />
+    <Compile Include="Attributes\DisplayNameAttribute.cs" />
+    <Compile Include="Attributes\FlatternHierarchyAttribute.cs" />
+    <Compile Include="Attributes\ItemAddingEventArgs.cs" />
+    <Compile Include="Attributes\ItemDeletingEventArgs.cs" />
+    <Compile Include="Attributes\ItemEventArgs.cs" />
+    <Compile Include="Attributes\MarkupExtensions.cs" />
+    <Compile Include="Attributes\NumberRangeAttribute.cs" />
+    <Compile Include="Attributes\PropertyEditorAttribute.cs" />
+    <Compile Include="Attributes\PropertyOrderAttribute.cs" />
+    <Compile Include="Attributes\StringEditorAttribute.cs" />
+    <Compile Include="Controls\CollectionControl.cs" />
+    <Compile Include="Controls\CollectionControlDialog.xaml.cs">
+      <DependentUpon>CollectionControlDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CollectionEditor.xaml.cs">
+      <DependentUpon>CollectionEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ComplexControlEditor.cs" />
+    <Compile Include="Controls\ComplexEditorWindow.cs" />
+    <Compile Include="Controls\DoubleEditor.cs" />
+    <Compile Include="Controls\EnumDropdown.cs" />
+    <Compile Include="Controls\ExtendSelector.cs" />
+    <Compile Include="Controls\PasswordEditor.cs" />
+    <Compile Include="Controls\PointEditor.cs" />
+    <Compile Include="Controls\SearchTextBox.cs" />
+    <Compile Include="Controls\SliderEditorBase.cs" />
+    <Compile Include="Converters\ClassToColor.cs" />
+    <Compile Include="Converters\DebugConverter.cs" />
+    <Compile Include="Converters\DefaultPercentConverter.cs" />
+    <Compile Include="Converters\EmptyValueConverter.cs" />
+    <Compile Include="Converters\EnumValueConverter.cs" />
+    <Compile Include="Converters\ExpanderHeaderWidthConverter.cs" />
+    <Compile Include="Converters\FontConverterDecorator.cs" />
+    <Compile Include="Converters\FontStretchConverterDecorator.cs" />
+    <Compile Include="Converters\FontStyleConverterDecorator.cs" />
+    <Compile Include="Converters\FontWeightConverterDecorator.cs" />
+    <Compile Include="Converters\MultiBooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\NewItemTypesComboBoxConverter.cs" />
+    <Compile Include="Converters\NullValueConverter.cs" />
+    <Compile Include="Design\AlphabeticalLayout.cs" />
+    <Compile Include="Design\CategorizedLayout.cs" />
+    <Compile Include="Design\CategoryContainer.cs" />
+    <Compile Include="Design\CategoryEditorContentPresenter.cs" />
+    <Compile Include="Design\CategoryItemsLayout.cs" />
+    <Compile Include="Design\ExtendedPropertyEditorTab.cs" />
+    <Compile Include="Design\GridEntryContainer.cs" />
+    <Compile Include="Design\GridEntryLayout.cs" />
+    <Compile Include="Design\PropertyContainer.cs" />
+    <Compile Include="Design\PropertyEditorContentPresenter.cs" />
+    <Compile Include="Design\PropertyItemsLayout.cs" />
+    <Compile Include="Design\PropertyNameTextBlock.cs" />
+    <Compile Include="Design\TabbedLayout.cs" />
+    <Compile Include="Design\TabbedLayoutItem.cs" />
+    <Compile Include="Input\PropertyEditorCommands.cs" />
+    <Compile Include="Input\PropertyGridCommands.cs" />
+    <Compile Include="Internal\MathUtil.cs" />
+    <Compile Include="Internal\MergedPropertyDescriptor.cs" />
+    <Compile Include="Other\FontList.cs" />
+    <Compile Include="Other\FontSizeList.cs" />
+    <Compile Include="Other\FontStyleConverter.cs" />
+    <Compile Include="Other\FontWeightConverter.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="PropertyEditing\CategoryItemComparer.cs" />
+    <Compile Include="PropertyEditing\Filters\IPropertyFilterTarget.cs" />
+    <Compile Include="PropertyEditing\Filters\PropertyFilter.cs" />
+    <Compile Include="PropertyEditing\Filters\PropertyFilterAppliedEventArgs.cs" />
+    <Compile Include="PropertyEditing\Filters\PropertyFilterPredicate.cs" />
+    <Compile Include="PropertyEditing\NamedColor.cs" />
+    <Compile Include="PropertyEditing\NamedColorList.cs" />
+    <Compile Include="PropertyEditing\PropertyItemComparer.cs" />
+    <Compile Include="PropertyEditing\ValueExceptionEventArgs.cs" />
+    <Compile Include="PropertyEditing\ValueExceptionSource.cs" />
+    <Compile Include="Utils\PasswordBoxExtender.cs" />
+    <Compile Include="Utils\TextBoxExtender.cs" />
+    <Compile Include="Utils\ValueWrapper.cs" />
+    <Compile Include="WPFPropertyGrid.cs" />
+    <Page Include="Controls\CollectionControlDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CollectionEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Design\AlphabeticalLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Design\CategorizedLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Design\TabbedLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\DoubleEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\EditorResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\PropertyGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\SearchTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="CategoryEditor.cs" />
+    <Compile Include="CategoryItem.cs" />
+    <Compile Include="DataResource.cs" />
+    <Compile Include="DataToTypeConverter.cs" />
+    <Compile Include="Editor.cs" />
+    <Compile Include="EditorCollection.cs" />
+    <Compile Include="EditorKeys.cs" />
+    <Compile Include="GridEntry.cs" />
+    <Compile Include="GridEntryCollection.cs" />
+    <Compile Include="KnownTypes.cs" />
+    <Compile Include="MetadataRepository.cs" />
+    <Compile Include="ObjectServices.cs" />
+    <Compile Include="PropertyDisplayMode.cs" />
+    <Compile Include="PropertyEditingEventArgs.cs" />
+    <Compile Include="PropertyEditor.cs" />
+    <Compile Include="PropertyGrid.Commands.cs" />
+    <Compile Include="PropertyGrid.cs" />
+    <Compile Include="PropertyItem.cs" />
+    <Compile Include="PropertyItemValue.cs" />
+    <Compile Include="PropertyValueChangedEventArgs.cs" />
+    <Compile Include="ResourceLocator.cs" />
+    <Compile Include="TypeEditor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Metadata\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\clear.png" />
+    <Resource Include="Themes\Images\search.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,546 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:TK="http://schemas.microsoft.com/wpf/2008/toolkit" xmlns:local="clr-namespace:System.Windows.Controls.WpfPropertyGrid" xmlns:design="clr-namespace:System.Windows.Controls.WpfPropertyGrid.Design" xmlns:controls="clr-namespace:System.Windows.Controls.WpfPropertyGrid.Controls"  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                   
+                    xmlns:Controls1="clr-namespace:System.Windows.Controls.WpfPropertyGrid"
+                    xmlns:converters="clr-namespace:System.Windows.Controls.WpfPropertyGrid.Converters"
+                    mc:Ignorable="d">
+
+
+    <local:DataToTypeConverter x:Key="DataToTypeConverter"/>
+    <converters:NewItemTypesComboBoxConverter x:Key="NewItemTypesComboBoxConverter" />
+
+    <local:NamedColorList x:Key="NamedColorList"/>
+    <local:NullValueConverter x:Key="NullValueConverter"/>
+    <local:EnumValueConverter x:Key="enumValueConverter"/>
+    <local:MultiBooleanToVisibilityConverter x:Key="multiBooleanToVisibilityConverter"/>
+    <local:ExpanderHeaderWidthConverter x:Key="expanderHeaderWidthConverter"/>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+
+    <Style TargetType="{x:Type  controls:CollectionControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:CollectionControl}">
+                	<ControlTemplate.Resources>
+                		          	
+					</ControlTemplate.Resources>
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" d:DesignWidth="495.899" d:DesignHeight="266.666">
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+
+                                <ColumnDefinition Width="0.0*"     />
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="0.5*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Margin="0,12.833,8,0"
+                        		Padding="5,0"
+                        		Content="+" 
+                        		Command="New"
+                        		CommandParameter="{Binding SelectedItem, ElementName=_itemsListBox}" MinWidth="20" MinHeight="20"  HorizontalAlignment="Right" Width="20" Height="20" VerticalAlignment="Top" Grid.Column="2" />
+
+                            <ListBox x:Name="_itemsListBox"
+                        		Grid.Row="0" MaxHeight="600"
+                        		ItemsSource="{Binding Items, RelativeSource={RelativeSource TemplatedParent}}"
+                        		SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}}"
+
+                        		SelectedIndex="0" Margin="2,43.837,2.733,8" Grid.Column="2"/>
+                            <StackPanel   Grid.Row="2"  Margin="0" Orientation="Vertical" Grid.ColumnSpan="1" Grid.Column="3" VerticalAlignment="Center">
+                                <Button Margin="0"
+                                 
+                        			Command="Delete"
+                        			CommandParameter="{Binding SelectedItem, ElementName=_itemsListBox}" Content="x" HorizontalAlignment="Stretch" MinWidth="20" MinHeight="20" Width="20" Height="20"/>
+                                <Button Margin="0"
+                                 
+                        			Command="MoveUp"
+                        			CommandParameter="{Binding SelectedItem, ElementName=_itemsListBox}" Content="↑" MinWidth="20" MinHeight="20"  HorizontalAlignment="Stretch" Width="20" Height="20"/>
+                                <Button Margin="0"
+                                 
+                        			Command="MoveDown"
+                        			CommandParameter="{Binding SelectedItem, ElementName=_itemsListBox}" Content="↓" MinWidth="20" MinHeight="20"  HorizontalAlignment="Stretch" Width="20" Height="20"/>
+                            </StackPanel>
+                            <local:PropertyGrid 
+                        		PropertyFilterVisibility="Collapsed"
+                        		SelectedProperty="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}}" 
+                        		ListCollection="{Binding Value}"
+                        		ItemsForeground="{DynamicResource TextBrush}"
+                        		ListControl="{Binding ElementName=_itemsListBox}"
+							 
+                        		Grid.RowSpan="1" BorderThickness="0" Margin="0.002,23.837,0,0" Grid.Row="0" Height="Auto" VerticalAlignment="Stretch" Grid.ColumnSpan="1" Grid.Column="4" HorizontalAlignment="Stretch" Width="Auto" RenderTransformOrigin="0.5,0.5" 
+                                         />
+                            <TextBlock Grid.Column="4" Margin="7.998,4,17.301,0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="Width"><Run Language="zh-cn" Text="属性编辑"/></TextBlock>
+                            <ComboBox x:Name="PART_NewItemTypesComboBox" Margin="2,12.833,38.45,0" SelectedItem="{Binding ItemsSourceType, RelativeSource={RelativeSource TemplatedParent}}" ItemsSource="{Binding NewItemTypes, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Top" ToolTip="可选的添加类型" Grid.Column="2">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListBoxItem}">
+                                        <Style.Triggers>
+
+                                            <DataTrigger Binding="{Binding Converter={StaticResource DataToTypeConverter}, Mode=OneWay}" Value="String">
+
+
+                                                <Setter Property="ContentTemplate">
+                                                    <Setter.Value>
+
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding}" />
+
+                                                        </DataTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Converter={StaticResource DataToTypeConverter}, Mode=OneWay}" Value="XFrmWorkAttribute">
+
+                                                <Setter Property="ContentTemplate">
+                                                    <Setter.Value>
+
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding Name}" ToolTip="{Binding Description}" />
+
+                                                        </DataTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                         
+                                        </Style.Triggers>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+                            <TextBlock Margin="8,18.833,8,0" TextWrapping="Wrap" Text="拖拽到右侧添加元素" VerticalAlignment="Top"/>
+                            <ListBox SelectedItem="{Binding ItemsSourceType, RelativeSource={RelativeSource TemplatedParent}}" ItemsSource="{Binding NewItemTypes, RelativeSource={RelativeSource TemplatedParent}}"  Margin="8,50,3,8">
+                            	  <ListBox.ItemContainerStyle>
+                            	  	  <Style TargetType="{x:Type ListBoxItem}">
+                                        <Style.Triggers>
+
+                                            <DataTrigger Binding="{Binding Converter={StaticResource DataToTypeConverter}, Mode=OneWay}" Value="Type">
+
+
+                                                <Setter Property="ContentTemplate">
+                                                    <Setter.Value>
+
+                                                        <DataTemplate>
+                                                        <Grid HorizontalAlignment="Stretch" Height="65.334" Width="100" d:DesignWidth="210.332" d:DesignHeight="136.471">
+                            	  			<Label Content="{Binding Name}" Margin="0" Height="Auto" VerticalAlignment="Bottom" FontSize="12" d:LayoutOverrides="GridBoX" HorizontalAlignment="Center" Width="Auto"/>
+                            	  			<Rectangle Stroke="Black"  ToolTip="{Binding}" RadiusX="13" RadiusY="3" StrokeThickness="0" Width="45" Height="45" HorizontalAlignment="Center" VerticalAlignment="Top">
+                            	  				<Rectangle.Fill>
+                            	  					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.3,0">
+                            	  						<GradientStop Color="#FF3B3B3B" Offset="0.418"/>
+                            	  						<GradientStop Color="#FF818181" Offset="0.125"/>
+                            	  					</LinearGradientBrush>
+                            	  				</Rectangle.Fill>
+                            	  			</Rectangle>
+                            	  		</Grid>
+                                                        </DataTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Converter={StaticResource DataToTypeConverter}, Mode=OneWay}" Value="XFrmWorkAttribute">
+
+                                                <Setter Property="ContentTemplate">
+                                                    <Setter.Value>
+
+                                                        <DataTemplate>
+                                                           <Grid HorizontalAlignment="Stretch" Height="65.334" Width="100" d:DesignWidth="210.332" d:DesignHeight="136.471">
+                            	  			<Label Content="{Binding}" Margin="0" Height="Auto" VerticalAlignment="Bottom" FontSize="12" d:LayoutOverrides="GridBoX" HorizontalAlignment="Center" Width="Auto"/>
+                            	  			<Rectangle Stroke="Black"  ToolTip="{Binding Description}" RadiusX="13" RadiusY="3" StrokeThickness="0" Width="45" Height="45" HorizontalAlignment="Center" VerticalAlignment="Top">
+                            	  				<Rectangle.Fill>
+                            	  					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.3,0">
+                            	  						<GradientStop Color="#FF3B3B3B" Offset="0.418"/>
+                            	  						<GradientStop Color="#FF818181" Offset="0.125"/>
+                            	  					</LinearGradientBrush>
+                            	  				</Rectangle.Fill>
+                            	  			</Rectangle>
+                            	  		</Grid>
+                                                        </DataTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                         
+                                        </Style.Triggers>
+                                    </Style>
+                            	                	  
+								  </ListBox.ItemContainerStyle>              
+							</ListBox>
+
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+
+    <Style TargetType="{x:Type controls:ComplexControlEditor}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ComplexControlEditor}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Button x:Name="EditButton" Content="编辑" Width="75"  />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:ComplexEditorWindow}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ComplexEditorWindow}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid Height="Auto">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ContentPresenter Name="PART_ContentPresenter"/>
+                            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="5">
+                                <Button Width="75" Margin="2"  Name="PART_OK_Button"  IsDefault="True">OK</Button>
+                                <Button Width="75" Margin="2"  Name="PART_CANCEL_Button"  IsCancel="True">Cancel</Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Width" Value="600"/>
+        <Setter Property="Height" Value="400"/>
+        <Setter Property="Title" Value="复合对象编辑器"/>
+        <Setter Property="Background" Value="{DynamicResource NormalBrush}"/>
+    </Style>
+
+    
+
+
+
+    <DataTemplate x:Key="{x:Static local:EditorKeys.ComplexPropertyEditorKey}">
+        <Grid  >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox Text="{Binding Value, Mode=OneWay}" Grid.Column="0" IsEnabled="False"
+                />
+            <controls:ComplexControlEditor Grid.Column="1" DataContext="{Binding Value}"></controls:ComplexControlEditor>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="{x:Static local:EditorKeys.CollectionEditorKey}">
+
+        <Controls1:CollectionEditor DataContext="{Binding Value}" BindingSource="{Binding}"    >
+        </Controls1:CollectionEditor>
+
+    </DataTemplate>
+
+    <DataTemplate x:Key="{x:Static local:EditorKeys.DefaultCategoryEditorKey}">
+        <design:PropertyItemsLayout ItemsSource="{Binding Properties}"/>
+    </DataTemplate>
+
+    <!--Note that commit on typing cannot work together with the roolback since every keystroke is committed and the roolback value is lost-->
+    <DataTemplate x:Key="{x:Static local:EditorKeys.DefaultEditorKey}">
+        <TextBox
+			x:Name="PART_editor"
+			Text="{Binding Value, Mode=TwoWay}"
+			IsReadOnly="{Binding IsReadOnly}"
+		
+			local:TextBoxExtender.RollbackOnEscape="true"
+			local:TextBoxExtender.CommitOnTyping="True"
+            	/>
+            	<!--local:TextBoxExtender.CommitOnEnter="True"-->
+		
+    </DataTemplate>
+
+    <DataTemplate x:Key="CodeEditor">
+        <Grid>
+
+            <TextBox TextWrapping="Wrap" AcceptsReturn="True" 	local:TextBoxExtender.CommitOnTyping="True"
+  VerticalScrollBarVisibility="Visible"  Grid.Column="0" Text="{Binding StringValue}" AcceptsTab="True"  />
+
+        </Grid>
+
+    </DataTemplate>
+
+    <DataTemplate x:Key="{x:Static local:EditorKeys.FilePathPickerEditorKey}">
+        <Grid DataContext="{Binding Value}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0"  
+                 Text="{Binding Path}" 
+                 IsReadOnly="False"
+                 ToolTip="{Binding Filter}"/>
+
+            <Button Grid.Column="1" Margin="2,0,0,0" Content="..." Width="20" 
+              Command="{Binding Commands[0]}"
+          
+              />
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="{x:Static local:EditorKeys.UserControlEditorKey}">
+        <ContentPresenter Content="{Binding Value}"/>
+    </DataTemplate>
+    <DataTemplate x:Key="{x:Static local:EditorKeys.EnumEditorKey}">
+        <controls:EnumDropdown
+      x:Name="PART_editor"
+      Style="{DynamicResource {x:Type ComboBox}}"
+      PropertyValue="{Binding}"
+      IsEnabled="{Binding IsEditable}">
+            <controls:EnumDropdown.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding ., Converter={StaticResource enumValueConverter}}" />
+                </DataTemplate>
+            </controls:EnumDropdown.ItemTemplate>
+        </controls:EnumDropdown>
+    </DataTemplate>
+
+    <DataTemplate  x:Key="{x:Static local:EditorKeys.ExtendSelectorEditorKey}">
+        <ComboBox
+      x:Name="PART_editor"
+      Style="{DynamicResource {x:Type ComboBox}}"
+      SelectedItem="{Binding SelectItem}"
+         DataContext="{Binding Value}"
+            ItemsSource="{Binding Collection}" >
+
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Converter={StaticResource DataToTypeConverter}, Mode=OneWay}" Value="String">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" />
+
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Converter={StaticResource DataToTypeConverter}, Mode=OneWay}" Value="XFrmWorkAttribute">
+
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip="{Binding Description}" />
+
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+
+
+
+
+        </ComboBox>
+    </DataTemplate>
+    <DataTemplate x:Key="{x:Static local:EditorKeys.CommandsBindingEditorKey}">
+        <ListBox ItemsSource="{Binding Value}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+
+                    <Button  Content="{Binding Text}" DataContext="{Binding}" Command="{Binding}"  />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+
+                    <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False"/>
+
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </DataTemplate>
+     
+
+
+    <DataTemplate x:Key="{x:Static local:EditorKeys.BooleanEditorKey}">
+        <CheckBox x:Name="PART_editor" IsChecked="{Binding Value}" IsEnabled="{Binding IsEditable}" />
+    </DataTemplate>
+    <DataTemplate x:Key="{x:Static local:EditorKeys.DictionaryEditorKey}">
+    	<Grid d:DesignWidth="71.25" d:DesignHeight="64.916" MaxHeight="400">
+    		<ListView Margin="0" ItemsSource="{Binding Value}" ToolTip="字典编辑器">
+    			  <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="名称" DisplayMemberBinding="{Binding Key}" />
+                        <GridViewColumn Header="值" DisplayMemberBinding="{Binding Value}" />
+                        
+                    </GridView>
+                </ListView.View> 	
+			</ListView>
+    	</Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="{x:Static local:EditorKeys.FontFamilyEditorKey}">
+        <ComboBox
+      x:Name="PART_editor"
+      SelectedValue="{Binding Value}"
+      ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}"
+      IsEnabled="{Binding IsEditable}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" FontFamily="{Binding}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+    </DataTemplate>
+
+    <DataTemplate x:Key="{x:Static local:EditorKeys.NamedColorEditorKey}" DataType="{x:Type local:NamedColor}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Fill="{Binding Brush}" Grid.Column="0" Width="100" Height="20" Margin="2" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="PART_editor" Margin="5,2,2,2" Text="{Binding Name}" Grid.Column="1" HorizontalAlignment="Center"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="{x:Static local:EditorKeys.BrushEditorKey}">
+        <ComboBox
+      x:Name="PART_editor"
+      Text="{Binding StringValue, Converter={StaticResource NullValueConverter}, Mode=TwoWay}"
+      ItemsSource="{Binding Source={StaticResource NamedColorList}}"
+      ItemTemplate="{DynamicResource {x:Static local:EditorKeys.NamedColorEditorKey}}"
+      SelectedValuePath="Name"
+      IsEditable="{Binding IsEditable}"
+      IsEnabled="{Binding IsEditable}"/>
+    </DataTemplate>
+
+
+    <DataTemplate x:Key="{x:Static local:EditorKeys.SliderEditorKey}">
+        <Slider x:Name="PART_editor"
+            Value="{Binding Value}"
+            Minimum="{Binding ParentProperty.Metadata[NumberRange].Minimum, FallbackValue=0}"
+            Maximum="{Binding ParentProperty.Metadata[NumberRange].Maximum, FallbackValue=100}"
+            TickFrequency="{Binding ParentProperty.Metadata[NumberRange].Tick, FallbackValue=1}"
+            AutoToolTipPrecision="{Binding ParentProperty.Metadata[NumberRange].Precision, FallbackValue=0}"
+            AutoToolTipPlacement="BottomRight"
+            IsDirectionReversed="False"
+            IsMoveToPointEnabled="True"
+            IsSnapToTickEnabled="False"
+            IsEnabled="{Binding IsEditable}"
+            />
+    </DataTemplate>
+
+
+    <DataTemplate x:Key="{x:Static local:EditorKeys.DoubleEditorKey}">
+        <controls:DoubleEditor
+        x:Name="PART_editor"
+        Value="{Binding Value, Mode=TwoWay}"
+        Minimum="{Binding ParentProperty.Metadata[NumberRange].Minimum}"
+        Maximum="{Binding ParentProperty.Metadata[NumberRange].Maximum}"
+        DefaultChange="{Binding ParentProperty.Metadata[NumberRange].Tick}"
+        MaxPrecision="{Binding ParentProperty.Metadata[NumberRange].Precision}"
+        IsEnabled="{Binding IsEditable}"
+        />
+    </DataTemplate>
+
+
+
+    <local:DefaultPercentConverter x:Key="DefaultPercentConverter"/>
+    <local:FontList x:Key="FontFamilyList"/>
+    <local:FontSizeList x:Key="FontSizeList"/>
+    <local:FontStyleConverter x:Key="FontStyleConverter"/>
+    <local:FontWeightConverter x:Key="FontWeightConverter"/>
+    <local:EmptyValueConverter x:Key="emptyValueConverter"/>
+
+
+
+
+
+
+    <DataTemplate x:Key="{x:Static local:EditorKeys.DateTimePropertyEditorKey}">
+        <DatePicker SelectedDate="{Binding Value, Mode=TwoWay}"/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="{x:Static local:EditorKeys.PointPropertyEditorKey}">
+        <Expander >
+            <Expander.Header>
+                <TextBox x:Name="PART_editor"                 
+                 Text="坐标编辑器" 
+                 Width="{Binding ActualWidth, ConverterParameter=-30, Converter={StaticResource expanderHeaderWidthConverter}, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type Expander}, Mode=FindAncestor}}"/>
+            </Expander.Header>
+            <StackPanel Margin="5" DataContext="{Binding Value}">
+                <controls:PointEditor Style="{DynamicResource {x:Type Slider}}"
+                             EditValue="{Binding Value, Converter={StaticResource emptyValueConverter}}" 
+                             DisplayMember="X"
+                             Minimum="0" Maximum="1" TickFrequency="0.1"
+                             AutoToolTipPrecision="2" ToolTip="X property"/>
+                <controls:PointEditor Style="{DynamicResource {x:Type Slider}}"
+                             EditValue="{Binding Value, Converter={StaticResource emptyValueConverter}}" 
+                             DisplayMember="Y"
+                             Minimum="0" Maximum="1" TickFrequency="0.1"
+                             AutoToolTipPrecision="2" ToolTip="Y property"/>
+            </StackPanel>
+        </Expander>
+    </DataTemplate>
+
+    <DataTemplate x:Key="MyCustomExtendedTemplate_Inline">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Text="{Binding StringValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsReadOnly}"/>
+            <Button Grid.Column="1" Margin="2,0,0,0" Content="[...]" Width="20" Command="local:PropertyEditorCommands.ShowExtendedEditor" CommandParameter="{Binding}"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="x:Static local:EditorKeys.MyCustomExtendedTemplate_Extended">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="0" Text="{Binding StringValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsReadOnly}" TextWrapping="Wrap"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="PasswordEditor">
+        <PasswordBox
+      x:Name="PART_editor"
+      local:PasswordBoxExtender.BindPassword="true"
+      local:PasswordBoxExtender.BoundPassword="{Binding StringValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+      IsEnabled="{Binding IsEditable}"/>
+
+    </DataTemplate>
+    <DataTemplate x:Key="TextCategoryEditor">
+        <StackPanel Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox 
+                    Grid.Column="0"
+                    Margin="2"
+                    ItemsSource="{Binding Source={StaticResource FontFamilyList}}" 
+                    DisplayMemberPath="FamilyNames.Values[0]"
+                    SelectedItem="{Binding [FontFamily].PropertyValue.Value}"/>
+                <ComboBox 
+                    Grid.Column="1"
+                    Margin="2"
+                    ItemsSource="{Binding Source={StaticResource FontSizeList}}"
+                    SelectedItem="{Binding [FontSize].PropertyValue.Value}"/>
+            </Grid>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox 
+                    Margin="2"
+                    Content="Bold"
+                    IsChecked="{Binding [FontWeight].PropertyValue.Value, Converter={StaticResource FontWeightConverter}}"/>
+                <CheckBox 
+                    Margin="2"
+                    Content="Italic"
+                    IsChecked="{Binding [FontStyle].PropertyValue.Value, Converter={StaticResource FontStyleConverter}}"/>
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>
+
+</ResourceDictionary>
