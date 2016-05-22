@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls.WpfPropertyGrid.Annotations;
+using System.Windows.Controls.WpfPropertyGrid.Attributes;
 
 namespace System.Windows.Controls.WpfPropertyGrid.Utils
 {
@@ -23,7 +24,7 @@ namespace System.Windows.Controls.WpfPropertyGrid.Utils
             }
         }
 
-        [DisplayName("值")]
+        [LocalizedDisplayName("值")]
         public object Item
         {
             get
