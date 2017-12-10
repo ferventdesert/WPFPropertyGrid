@@ -58,7 +58,7 @@
     <Compile Include="Attributes\ItemAddingEventArgs.cs" />
     <Compile Include="Attributes\ItemDeletingEventArgs.cs" />
     <Compile Include="Attributes\ItemEventArgs.cs" />
-    <Compile Include="Attributes\LocalizableAttribute.cs" />
+    <Compile Include="Attributes\LocalizedDisplayName.cs" />
     <Compile Include="Attributes\MarkupExtensions.cs" />
     <Compile Include="Attributes\NumberRangeAttribute.cs" />
     <Compile Include="Attributes\PropertyEditorAttribute.cs" />
