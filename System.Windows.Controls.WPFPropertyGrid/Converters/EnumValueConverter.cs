@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
+using System.Windows.Controls.WpfPropertyGrid.Attributes;
 using System.Windows.Data;
 
 namespace System.Windows.Controls.WpfPropertyGrid
@@ -16,25 +17,32 @@ namespace System.Windows.Controls.WpfPropertyGrid
     /// </summary>
     public const string NullValueString = "(null)";
 
-    #region IValueConverter Members
-
-    /// <summary>
-    /// Converts a value.
-    /// </summary>
-    /// <param name="value">The value produced by the binding source.</param>
-    /// <param name="targetType">The type of the binding target property.</param>
-    /// <param name="parameter">The converter parameter to use.</param>
-    /// <param name="culture">The culture to use in the converter.</param>
-    /// <returns>
-    /// A converted value. If the method returns null, the valid null value is used.
-    /// </returns>
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        #region IValueConverter Members
+      public static string Get(string name)
+      {
+          object str = null;
+          str = Application.Current.TryFindResource(name);
+          if (str == null)
+              return name;
+          return str.ToString();
+      }
+        /// <summary>
+        /// Converts a value.
+        /// </summary>
+        /// <param name="value">The value produced by the binding source.</param>
+        /// <param name="targetType">The type of the binding target property.</param>
+        /// <param name="parameter">The converter parameter to use.</param>
+        /// <param name="culture">The culture to use in the converter.</param>
+        /// <returns>
+        /// A converted value. If the method returns null, the valid null value is used.
+        /// </returns>
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
       if (value is Enum)
       {
         var fi = value.GetType().GetField(value.ToString());
         var attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
-        return ((attributes.Length > 0) && (!String.IsNullOrEmpty(attributes[0].Description))) ? attributes[0].Description : value.ToString();
+        return ((attributes.Length > 0) && (!String.IsNullOrEmpty(attributes[0].Description))) ? Get(attributes[0].Description) : Get(value.ToString());
       }
       // return (null) in case enum value is not assigned...       
       // this is mainly for dependency properties as DP property may contain undefined enum

@@ -36,6 +36,18 @@ namespace System.Windows.Controls.WpfPropertyGrid.Controls
 
         }
     }
+    public class MarkdownEditor : Editor
+    {
+        static ResourceDictionary dataViewResource = Application.LoadComponent(new Uri("/System.Windows.Controls.WpfPropertyGrid;component/Themes/EditorResources.xaml", UriKind.Relative)) as ResourceDictionary;
+        public MarkdownEditor()
+        {
+
+
+
+            InlineTemplate = dataViewResource["MarkdownEditor"];
+
+        }
+    }
 
 
 }

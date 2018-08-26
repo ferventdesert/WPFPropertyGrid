@@ -76,10 +76,13 @@
     <Compile Include="Controls\DoubleEditor.cs" />
     <Compile Include="Controls\EnumDropdown.cs" />
     <Compile Include="Controls\ExtendSelector.cs" />
+    <Compile Include="Controls\Markdown.cs" />
     <Compile Include="Controls\PasswordEditor.cs" />
     <Compile Include="Controls\PointEditor.cs" />
     <Compile Include="Controls\SearchTextBox.cs" />
     <Compile Include="Controls\SliderEditorBase.cs" />
+    <Compile Include="Controls\TextEditSelector.cs" />
+    <Compile Include="Controls\TextToFlowDocumentConverter.cs" />
     <Compile Include="Converters\ClassToColor.cs" />
     <Compile Include="Converters\DebugConverter.cs" />
     <Compile Include="Converters\DefaultPercentConverter.cs" />
@@ -219,6 +222,9 @@
   <ItemGroup>
     <Resource Include="Themes\Images\clear.png" />
     <Resource Include="Themes\Images\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Controls\Markdown.Xaml.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

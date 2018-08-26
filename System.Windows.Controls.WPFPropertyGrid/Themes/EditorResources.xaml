@@ -3,6 +3,7 @@
                    
                     xmlns:Controls1="clr-namespace:System.Windows.Controls.WpfPropertyGrid"
                     xmlns:converters="clr-namespace:System.Windows.Controls.WpfPropertyGrid.Converters"
+                    xmlns:xaml="clr-namespace:Markdown.Xaml"
                     mc:Ignorable="d">
 
 
@@ -15,7 +16,18 @@
     <local:MultiBooleanToVisibilityConverter x:Key="multiBooleanToVisibilityConverter"/>
     <local:ExpanderHeaderWidthConverter x:Key="expanderHeaderWidthConverter"/>
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-
+    <xaml:Markdown  x:Key="Markdown" 
+                       DocumentStyle="{DynamicResource DocumentStyle}"
+                       Heading1Style="{DynamicResource H1Style}"
+                       Heading2Style="{DynamicResource H2Style}"
+                       Heading3Style="{DynamicResource H3Style}"
+                       Heading4Style="{DynamicResource H4Style}"
+                       LinkStyle="{DynamicResource LinkStyle}"
+                       ImageStyle="{DynamicResource ImageStyle}"
+                       SeparatorStyle="{DynamicResource SeparatorStyle}"></xaml:Markdown>
+    <!--AssetPathRoot="{x:Static system:Environment.CurrentDirectory}"/>-->
+    <xaml:TextToFlowDocumentConverter x:Key="TextToFlowDocumentConverter"     
+                                         Markdown="{StaticResource Markdown}"/>
 
     <Style TargetType="{x:Type  controls:CollectionControl}">
         <Setter Property="Template">
@@ -264,6 +276,18 @@
 
     </DataTemplate>
 
+
+    <DataTemplate x:Key="MarkdownEditor">
+        <FlowDocumentScrollViewer Grid.Row="0"
+                                                  Grid.Column="1"  
+                                                  VerticalAlignment="Stretch"
+                                                  HorizontalAlignment="Stretch"
+                                                  Margin="1"
+                                                  Document="{Binding StringValue, Converter={StaticResource TextToFlowDocumentConverter}}" />
+
+
+    </DataTemplate>
+
     <DataTemplate x:Key="{x:Static local:EditorKeys.FilePathPickerEditorKey}">
         <Grid DataContext="{Binding Value}">
             <Grid.ColumnDefinitions>
@@ -343,6 +367,21 @@
 
         </ComboBox>
     </DataTemplate>
+    <DataTemplate  x:Key="{x:Static local:EditorKeys.TextEditSelectorEditorKey}">
+        <ComboBox
+            x:Name="PART_editor"
+            Style="{DynamicResource {x:Type ComboBox}}"
+            SelectedItem="{Binding SelectItem}"
+            DataContext="{Binding Value}"
+            IsEditable="True"
+            Text="{Binding _SelectItem}"
+            ItemsSource="{Binding Collection}" >
+
+        </ComboBox>
+    </DataTemplate>
+
+
+
     <DataTemplate x:Key="{x:Static local:EditorKeys.CommandsBindingEditorKey}">
         <ListBox ItemsSource="{Binding Value}">
             <ListBox.ItemTemplate>

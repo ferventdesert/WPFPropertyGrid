@@ -21,6 +21,7 @@
 
         private static readonly ComponentResourceKey _PercentEditorKey = new ComponentResourceKey(ThisType, "PercentEditorTemplate");
         private static readonly ComponentResourceKey _XmlLanguageEditorKey = new ComponentResourceKey(ThisType, "XmlLanguageEditorTemplate");
+        private static readonly ComponentResourceKey _MarkdownEditorKey = new ComponentResourceKey(ThisType, "MarkdownEditorTemplate");
 
 
 
@@ -43,6 +44,7 @@
 
         private static ComponentResourceKey _DictionaryEditorKey = new ComponentResourceKey(ThisType, "DictionaryEditorKey");
         private static ComponentResourceKey _CodeEditorEditorKey = new ComponentResourceKey(ThisType, "CodeEditorKey");
+        private static ComponentResourceKey _TextEditSelectorEditorKey = new ComponentResourceKey(ThisType, "TextEditSelectorEditorKey");
         public static ComponentResourceKey FilePathPickerEditorKey => _FilePathPickerEditorKey;
 
         public static ComponentResourceKey CodeEditorEditorKey => _CodeEditorEditorKey;
@@ -57,6 +59,11 @@
             get { return _XmlLanguageEditorKey; }
         }
 
+        public static ComponentResourceKey MarkdownEditorKey
+        {
+            get { return _MarkdownEditorKey; }
+        }
+        
         /// <summary>
         /// Gets the NamedColor editor key.
         /// </summary>
@@ -129,9 +136,9 @@
         /// Gets the default complex property editor key.
         /// </summary>
         public static ComponentResourceKey ComplexPropertyEditorKey => _ComplexPropertyEditorKey;
-
+        
         public static ComponentResourceKey ExtendSelectorEditorKey => _ExtendSelectorEditorKey;
-
+        public static ComponentResourceKey TextEditSelectorEditorKey => _TextEditSelectorEditorKey;
         public static ComponentResourceKey CommandsBindingEditorKey => _CommandsBindingEditorKey;
 
 

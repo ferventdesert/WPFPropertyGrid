@@ -30,6 +30,7 @@ namespace System.Windows.Controls.WpfPropertyGrid
                 { KnownTypes.Wpf.Brush, new TypeEditor(KnownTypes.Wpf.Brush, EditorKeys.BrushEditorKey) },
                 { typeof(Enum), new TypeEditor(typeof(Enum), EditorKeys.EnumEditorKey) },
                 { typeof(ExtendSelector), new TypeEditor(typeof(ExtendSelector), EditorKeys.ExtendSelectorEditorKey) },
+                { typeof(TextEditSelector), new TypeEditor(typeof(TextEditSelector), EditorKeys.TextEditSelectorEditorKey) },
                 {
                     typeof(ReadOnlyCollection<ICommand>),
                     new TypeEditor(typeof(ReadOnlyCollection<ICommand>), EditorKeys.CommandsBindingEditorKey)
