@@ -31,7 +31,7 @@
           
 				Click="Button_Click" d:LayoutOverrides="Width" Margin="5,0,0,0" >
 				<StackPanel Orientation="Horizontal">
-					<TextBlock TextWrapping="Wrap" Text="编辑集合"/>
+					<TextBlock TextWrapping="Wrap" Text="Edit"/>
 					<TextBlock TextWrapping="Wrap" Text="{Binding Count}" Margin="20,0,0,0"/>
 				</StackPanel>
 			</Button>
@@ -39,7 +39,7 @@
 			 
            
           
-				Click="Button_Click2" d:LayoutOverrides="Width" Margin="5,0,0,0" Content="清空" />
+				Click="Button_Click2" d:LayoutOverrides="Width" Margin="5,0,0,0" Content="Clean" />
 		</StackPanel>
 	</StackPanel>
 </UserControl>

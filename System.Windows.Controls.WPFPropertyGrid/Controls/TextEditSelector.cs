@@ -17,14 +17,35 @@ namespace System.Windows.Controls.WpfPropertyGrid.Controls
         {
         }
 
-        public TextEditSelector(IEnumerable<string> collection)
+        public List<string> Collection
         {
-
+            get
+            {
+                if (GetItems != null)
+                   return GetItems();
+                return collection;
+            }
         }
 
-        public List<string> Collection { get; private set; }
+        private List<string> collection;
         public string ItemType { get; }
-        public string SelectItem { get; set; }
+
+        public string SelectItem
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(_SelectItem))
+                    return _SelectItem;
+                return selectItem;
+
+            }
+            set
+            {
+
+                selectItem = value;
+                _SelectItem = value;
+            }
+        }
         public string _SelectItem { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -33,9 +54,9 @@ namespace System.Windows.Controls.WpfPropertyGrid.Controls
         {
         }
 
-        public void SetSource(IEnumerable<string> collection)
+        public void SetSource(IEnumerable<string> _collection)
         {
-            Collection=new List<string>();
+            this.collection = _collection.ToList();
         }
 
 
